@@ -92,13 +92,21 @@ class _SignupState extends State<Signup> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.visibility),
+                        icon: passwordvisible == false
+                            ? Icon(
+                          Icons.visibility,
+                          color: Color(0xFFA7B0BB),
+                        )
+                            : Icon(
+                          Icons.visibility_off_outlined,
+                          color: Color(0xFFA7B0BB),
+                        ),
                         onPressed: () {
                           setState(() {
                             passwordvisible = !passwordvisible;
                           });
                         },
-                      )),
+                      ),),
                   validator: (passwordvalue) {
                     if (passwordvalue!.isEmpty || passwordvalue.length < 6) {
                       return 'Enter a valid password!';

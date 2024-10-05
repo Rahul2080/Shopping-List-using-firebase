@@ -23,25 +23,25 @@ class _ProductdetailsState extends State<Productdetails> {
       floatingActionButton: FloatingActionButton(onPressed: (){  Navigator.of(context)
           .push(MaterialPageRoute(builder: (_) => ProductUpload())); },child: Icon(Icons.add),),
       body: SafeArea(
-        child: Expanded(
-          child: StreamBuilder<QuerySnapshot>(
-            stream: firestore,
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(
-                    "ERROR",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                );
-              }
-              if (snapshot.hasData) {
-                return ListView.separated(
+        child: StreamBuilder<QuerySnapshot>(
+          stream: firestore,
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  "ERROR",
+                  style: TextStyle(color: Colors.red),
+                ),
+              );
+            }
+            if (snapshot.hasData) {
+              return SizedBox(width: 500,height: 800,
+                child: ListView.separated(
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (BuildContext, position) {
                       return ListTile(
@@ -64,10 +64,10 @@ class _ProductdetailsState extends State<Productdetails> {
                     separatorBuilder: (BuildContext, position) {
                       return SizedBox();
                     },
-                    );
-              }
-           else{ return SizedBox();} } )
-        ),
+                    ),
+              );
+            }
+         else{ return SizedBox();} } ),
       ),
     );
   }
